@@ -16,11 +16,7 @@ export const getStaticProps = async () => {
         nodeByUri(uri: "/") {
           ... on Page {
             id
-            blocks {
-              name
-              attributesJSON
-              saveContent
-            }
+            blocks(postTemplate: false)
           }
         }
       }

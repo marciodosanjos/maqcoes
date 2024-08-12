@@ -3,11 +3,17 @@ import { Cover } from "components/Cover";
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
     switch (block.name) {
-      case "core/paragraph": {
+      case "core/cover": {
         console.log(block);
-        
-        return <Cover key={block.id} backgroundURL={block.attributes}>Core paragraph</Cover>;
+
+        return (
+          <Cover key={block.id} background={block.attributes.url}>
+            Core paragraph
+          </Cover>
+        );
       }
+      case "core/heading":
+        console.log(block);
       default:
         return null;
     }
