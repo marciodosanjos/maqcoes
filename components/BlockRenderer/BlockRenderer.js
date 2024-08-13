@@ -1,19 +1,31 @@
+import { Button } from "components/Button/Button";
 import { Cover } from "components/Cover";
+import { Heading } from "components/Heading";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
     switch (block.name) {
       case "core/cover": {
-        console.log(block);
-
         return (
           <Cover key={block.id} background={block.attributes.url}>
-            Core paragraph
+            <BlockRenderer blocks={block.innerBlocks} />
           </Cover>
         );
       }
-      case "core/heading":
+      case "core/heading": {
+        return (
+          <Heading
+            key={block.id}
+            textAlign={block.attributes.textAlign}
+            level={block.attributes.level}
+            content={block.attributes.content}
+          />
+        );
+      }
+      case "core/buttons": {
         console.log(block);
+      }
+
       default:
         return null;
     }
