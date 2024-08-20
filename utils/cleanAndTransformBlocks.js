@@ -1,18 +1,18 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid'
 
 export const cleanAndTransformBlocks = (blocksJSON) => {
-  const blocks = JSON.parse(JSON.stringify(blocksJSON));
+  const blocks = JSON.parse(JSON.stringify(blocksJSON))
 
   const assignIDs = (b) => {
     b.forEach((block) => {
-      block.id = uuid();
+      block.id = uuid()
       if (block.innerBlocks?.length) {
-        assignIDs(block.innerBlocks);
+        assignIDs(block.innerBlocks)
       }
-    });
-  };
+    })
+  }
 
-  assignIDs(blocks);
+  assignIDs(blocks)
 
-  return blocks;
-};
+  return blocks
+}
