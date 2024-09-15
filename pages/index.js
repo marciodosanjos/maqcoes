@@ -6,11 +6,15 @@ import { cleanAndTransformBlocks } from 'utils/cleanAndTransformBlocks'
 import { mapMainMenuItems } from 'utils/mapMainMenuItems'
 
 export default function Home(props) {
-  console.log('props: ', props)
+  console.log('MAIN: ', props)
 
   return (
     <div className='font-heading'>
-      <MainMenu items={props.mainMenuItems} />
+      <MainMenu
+        items={props.mainMenuItems}
+        callToActionLabel={props.callToActionLabel}
+        callToActionDestination={props.callToActionDestination}
+      />
       <BlockRenderer blocks={props.blocks} />;
     </div>
   )
@@ -28,6 +32,14 @@ export const getStaticProps = async () => {
         }
         acfOptionsMainMenu {
           mainMenu {
+            callToActionButton {
+              destination {
+                ... on Page {
+                  uri
+                }
+              }
+              label
+            }
             menuItems {
               menuItems {
                 destination {
@@ -59,6 +71,10 @@ export const getStaticProps = async () => {
       mainMenuItems: mapMainMenuItems(
         data.acfOptionsMainMenu.mainMenu.menuItems
       ),
+      callToActionLabel:
+        data.acfOptionsMainMenu.mainMenu.callToActionButton.label,
+      callToActionDestination:
+        data.acfOptionsMainMenu.mainMenu.callToActionButton.destination.uri,
     },
   }
 }
